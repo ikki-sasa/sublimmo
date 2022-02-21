@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+<main class="container-fluid">
+
+    <h1>Inscription</h1>
+
+    <header class="container-fluid p-5 text-center bg-light">
+        <h1>Subl'Immo - Inscription</h1>
+    </header>
+    <div class="row">
+        <div class="col-8 offset-2">
+            {% for label, messages in app.flashes %}
+            {% for message in messages %}
+            <div class="flash-{{ label }} bg-{{ label }} text-light p-3 mb-5 rounded">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="row py-5">
+        <div class="col-4 offset-4">
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            <button type="submit" class="btn btn-success">Valider</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+
+
+</main>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+
+<header id="home-header">
+    <div id="header-img"></div>
+    <h1>Subl'immo</h1>
+    <h2>L'agence immobilière 100% en ligne</h2>
+</header>
+
+<main class="container-fluid p-5">
+    <div class="row">
+        <div class="col-8 offset-2">
+            {% for label, messages in app.flashes %}
+            {% for message in messages %}
+            <div class="flash-{{ label }} bg-{{ label }} text-light p-3 mb-5 rounded">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8 offset-2">
+            <p>Situées en Île-de-France, et sur Paris, nos agences immobilière à
+                en ligne, vous accompagnent dans l'estimation la location, la vente, l'achat de vos biens immobiliers.
+                Véritable
+                référence du marché local, nos agences immobilières en france vous offrent toute leur expertise pour
+                répondre
+                à vos besoins. Vendeurs, acheteurs, investisseurs ou locataires, les agents d'Subl'immo proposent un
+                accompagnement personnalisé pour tous les acteurs du secteur.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h2>Logements</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        {# boucle for each #}
+        {% for maison in maisons %}
+        <div class="col-4 p-3">
+            <div class="card">
+                {# concaténation en twig ce fais avec le twild ~ #}
+                <img src=" {{asset('img/maison/' ~ maison.img1) }} " class="card-img-top"
+                    alt="photo principale {{maison.title}} ">
+                <div class="card-body">
+                    <h5 class="card-title">{{ maison.title }} </h5>
+                    <p class="card-text"> {{maison.description|u.truncate(90, '...', false) }} </p>
+                    {# nous avons utiliser les filtre en composer require twig/string-extra dans la console ne pas
+                    oublier d'utiliser le |#}
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Surface : {{ maison.surface }} m <sup>2</sup></li>
+                    <li class="list-group-item">Pièces : {{ maison.rooms }} dont {{ maison.bedrooms }} chambre(s) </li>
+                    <li class="list-group-item">Prix : {{ maison.price|number_format(0, ',', ' ') }} €</li>
+                    {# nous avons utiliser les filtre en composer require twig/string-extra dans la console ne pas
+                    oublier d'utiliser le | #}
+                </ul>
+                <div class="card-body text-center">
+                    <a href=" {{ path('maison_show', {'id': maison.id}) }} " class="btn btn-outline-secondary">Voir
+                        plus</a>
+                </div>
+            </div>
+        </div>
+        {# {% endif %} #}
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href=" {{ path('maison_index') }} " class="btn btn-secondary">Voir tout</a>
+        </div>
+    </div>
+    {# affichage des commerciaux #}
+    <div class="row">
+        <div class="col-12">
+            <h2>Notre équipe</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <ul>
+            {% for commercial in commerciaux %}
+            <li>{{ commercial.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</main>
+
+{% endblock %}

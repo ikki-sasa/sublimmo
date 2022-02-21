@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div class="col-12 text-end">
+	<a href="{{ path('comment_admin_index') }} " class="btn btn-outline-danger">Annuler</a>
+	<button class="btn btn-success">{{ button_label|default('Valider') }}</button>
+</div>
+{{ form_end(form) }}

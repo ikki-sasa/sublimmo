@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="Espace administrateur sublimo maison appartement immobilier agence en ligne">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="description" content="Espace administrateur sublimo">
+	<meta name="author" content="Samadjine">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href=" {{ asset('css/admin.css') }} ">
+	<title>SUBLIMO - ADMIN -{% block title %}{% endblock %}</title>
+	{% block stylesheets %} {% endblock %}
+</head>
+
+<body>
+
+	<header class="container-fluid text-center bg-dark text-light p-3">
+		<div class="row">
+			<div class="col-12">
+				<h2>Subl'immo - espace administrateurs</h2>
+			</div>
+		</div>
+	</header>
+
+	<main class="container-fluid">
+		<div class="row">
+
+			<div class="col-1 bg-secondary text-light" id="aside">
+				<nav>
+					<ul class="pt-5">
+						<li class="py-2">
+							<a href="{{path('admin')}}" title="Acceuil admnistrateur">
+								<i class="fas fa-laptop"></i>
+							</a>
+						</li>
+						<li class="py-2">
+							<a href="{{path('admin_maison_index')}}" title="Maisons">
+								<i class="fas fa-home"></i>
+							</a>
+						</li>
+						{% if is_granted('ROLE_SUPER_ADMIN') %}
+						<li class="py-2">
+							<a href=" {{path('comment_admin_index')}} " title="Commentaire">
+								<i class="fas fa-comment"></i>
+							</a>
+						</li>
+						{% endif %}
+						<li class="py-2">
+							<a href="#" title="Commerciaux">
+								<i class="fas fa-briefcase"></i>
+							</a>
+						</li>
+						<li class="py-2">
+							<a href="#" title="Utilisateur">
+								<i class="fas fa-users"></i>
+							</a>
+						</li>
+						<li class="py-2">
+							<a href="{{path('home')}}" title="Accueil site">
+								<i class="fas fa-home"></i>
+							</a>
+						</li>
+						<li class="py-2">
+							<a href="#" title="Déconnexion">
+								<i class="fas fa-sign-out-alt"></i>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-11" id="content">
+				<div class="row p-5">
+					{% for label, messages in app.flashes %}
+					{% for message in messages %}
+					<div class="flash-{{ label }} bg-{{ label }} text-light p-3 mb-5 rounded">
+						{{ message }}
+					</div>
+					{% endfor %}
+					{% endfor %}
+					{% block body %} {% endblock %}
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+	<footer class="container-fluid text-center bg-dark text-light pt-3 pb-2">
+		<p>copyright 2022 - SamDev</p>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="{{ asset('js/script.js') }}"></script>
+	{% block javascripts %} {% endblock %}
+</body>
+
+</html>
